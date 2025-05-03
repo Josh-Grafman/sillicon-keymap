@@ -95,9 +95,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 bool led_update_user(led_t led_state) {
     static uint8_t caps_state = 0;
-    if (caps_state != led_state.caps_lock) {
-        led_state.caps_lock ? layer_on(7) : layer_off(7);
-        caps_state = led_state.caps_lock;
+    if (caps_state != led_state.num_lock) {
+        led_state.num_lock ? layer_on(7) : layer_off(7);
+        caps_state = led_state.num_lock;
     }
     return true;
 }
