@@ -34,6 +34,14 @@ enum tap_dance_codes {
   DANCE_20,
 };
 
+// change to num_lock
+#define MSE_LED caps_lock
+
+static bool initialized = false;
+static bool mse_enabled = false;
+
+static led_t initial_led_state;
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_voyager(
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
@@ -92,6 +100,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                     TO(0),          KC_TRANSPARENT,                                 KC_NO,          TO(0)
   ),
 };
+
+uint32_t initialization_timeout(uint32_t trigger_time, void *cb_arg) {
+    initial_led_state = host_keyboard_led_state();
+    initialized = true;
+    return 0; // Don't repeat
+}
+
+bool led_update_user(led_t led_state) {
+    if (!initialized)
+        return true;
+
+    if (led_state.MSE_LED != initial_led_state.MSE_LED) {
+        layer_move(7);
+        mse_enabled = true;
+    } else {
+        mse_enabled = false;
+    }
+    return true;
+}
 
 const uint16_t PROGMEM combo0[] = { KC_ESCAPE, KC_3, COMBO_END};
 const uint16_t PROGMEM combo1[] = { KC_F, KC_P, COMBO_END};
