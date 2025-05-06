@@ -89,7 +89,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,                                          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, 
     KC_TRANSPARENT, KC_ESCAPE,      KC_SCRL,        KC_LEFT_SHIFT,  KC_MS_BTN1,     KC_MS_BTN2,                                     KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, 
     KC_TRANSPARENT, KC_DELETE,      KC_PC_CUT,      KC_PC_COPY,     KC_PC_PASTE,    KC_NO,                                          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, 
-                                                    TO(0),          KC_TRANSPARENT,                                 KC_NO,          TO(0)
+                                                    KC_NUM,         KC_TRANSPARENT,                                 KC_NO,          KC_NUM
   ),
 };
 
