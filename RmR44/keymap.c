@@ -94,10 +94,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 bool led_update_user(led_t led_state) {
-    static uint8_t caps_state = 0;
-    if (caps_state != led_state.num_lock) {
-        led_state.num_lock ? layer_on(7) : layer_off(7);
-        caps_state = led_state.num_lock;
+    static uint8_t num_state = 0;
+    static uint8_t scrl_state = 0;
+    scrl_state = led_state.scroll_lock;
+    if (num_state != led_state.num_lock) {
+        if (led_state.num_lock) {
+            layer_on(7);
+        } else {
+            layer_off(7);
+            if (scrl_state) {
+                tap_code(KC_SCRL);
+            }
+        }
+        num_state = led_state.num_lock;
     }
     return true;
 }
